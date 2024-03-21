@@ -1,7 +1,7 @@
 // AnalogComponent.h : Classe Reponsável por representar um componente com pino analógico
 #pragma once
-
 #include "Component.h"
+#include "../functions.h"
 
 namespace XGB
 {
@@ -19,7 +19,7 @@ namespace XGB
 
 		inline void write(uint8_t value)
 		{
-			// TODO: clamp value
+			clamp(value, 0, 255);
 			analogWrite(pin(), value);
 		}
 	};
