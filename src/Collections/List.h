@@ -6,7 +6,7 @@
 namespace XGB
 {
     template <typename T>
-    class List<T> :
+    class List :
         public Collection<T>
     {
     public:
@@ -15,20 +15,20 @@ namespace XGB
 	public:
 		inline void add(const T item)
 		{
-			++_size;
-			if (_size > _capacity)
+			++this->_size;
+			if (this->_size > capacity())
 			{
-				_capacity = _size;
-				realloc();
+				this->_capacity = size();
+				this->realloc();
 			}
-			_container[_size - 1] = item;
+			this->_container[_size - 1] = item;
 		}
 		
 		inline void remove(const size_t index)
 		{
-			_container[index] = 0;
-			move(_container, index + 1, _size, index);
-			--_size;
+			this->_container[index] = 0;
+			move<T>(this->_container, index + 1, size(), index);
+			--this->_size;
 		}
     };
 }

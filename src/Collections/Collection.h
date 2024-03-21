@@ -7,15 +7,15 @@ using XGB::fill;
 namespace XGB
 {
 	template <typename T>
-	class Collection<T>
+	class Collection
 	{
 	public:
-		Collection(size_t capacity = 0) :
-			_capacity(capacity),
-			_size(0)
+		Collection(size_t capacity = 0U) :
+			_capacity(capacity)
 		{
+			_size = 0U;
 			_container = new T[_capacity];
-			fill(_container, 0U, capacity);
+			fill<T>(_container, 0U, capacity);
 		}
 		virtual ~Collection()
 		{
@@ -24,11 +24,26 @@ namespace XGB
 		}
 
 	public:
-		inline T get(const size_t index) const
+		inline T operator[](int index) const
 		{
 			if (index > _size)
 				return 0;
 			return _container[index];
+		}
+
+		inline void clear()
+		{
+			fill<T>(_container, _capacity);
+		}
+
+		inline size_t size() const
+		{
+			return _size;
+		}
+
+		inline size_t capacity() const
+		{
+			return _capacity;
 		}
 
 		virtual inline void add(const T item) = 0;
@@ -42,8 +57,8 @@ namespace XGB
 			if (_container)
 			{
 				newContainer = new T[_capacity];
-				fill(newContainer, 0U, _capacity);
-				copy(_container, newContainer, 0, _capacity, 0);
+				fill<T>(newContainer, 0U, _capacity);
+				copy<T>(_container, newContainer, 0, _capacity, 0);
 				delete _container;
 				_container = newContainer;
 			}

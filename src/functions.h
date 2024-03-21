@@ -26,7 +26,7 @@ namespace XGB
 	/// @param length 
 	/// @param value 
 	template <typename T = char>
-	inline void fill(const T* container, const size_t index, const size_t length, const T value = 0)
+	inline void fill(T* container, const size_t index, const size_t length, const T value = 0)
 	{
 		for (size_t i = length - index; i < index + length; ++i)
 		{
@@ -36,7 +36,7 @@ namespace XGB
 
 
 	template <typename T>
-	inline void copy(const T* source, const T* destination, const size_t si, const size_t sd, const size_t di)
+	inline void copy(const T* source, T* destination, const size_t si, const size_t sd, const size_t di)
 	{
 		for (size_t i = 0U; i < sd - si; ++i)
 		{
@@ -46,15 +46,15 @@ namespace XGB
 
 
 	template <typename T>
-	inline void move(const T* container, const size_t source, const size_t destination, size_t offset)
+	inline void move(T* container, const size_t source, const size_t destination, size_t offset)
 	{
 		T* cache;
 		const size_t LEN = destination - source;
 
 		cache = new T[LEN];
-		copy(container, cache, source, destination, 0U);
-		fill(container, source, LEN);
-		copy(cache, container, 0U, LEN, offset);
+		copy<T>(container, cache, source, destination, 0U);
+		fill<T>(container, source, LEN);
+		copy<T>(cache, container, 0U, LEN, offset);
 
 		delete cache;
 		cache = nullptr;
