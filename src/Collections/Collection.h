@@ -14,26 +14,42 @@ namespace XGB
 			_capacity(capacity),
 			_size(0)
 		{
-			realloc();
+			_container = new T[_capacity];
+			fill(_container, 0U, capacity);
+		}
+		virtual ~Collection()
+		{
+			delete _container;
+			_container = nullptr;
 		}
 
 	public:
+		inline T get(const size_t index) const
+		{
+			if (index > _size)
+				return 0;
+			return _container[index];
+		}
+
 		virtual inline void add(const T item) = 0;
-		virtual inline void remove() = 0;
+		virtual inline void remove(const size_t index) = 0;
 
 	protected:
 		inline void realloc()
 		{
+			T* newContainer;
+			
 			if (_container)
 			{
+				newContainer = new T[_capacity];
+				fill(newContainer, 0U, _capacity);
+				copy(_container, newContainer, 0, _capacity, 0);
 				delete _container;
+				_container = newContainer;
 			}
-
-			_container = new T[capacity];
-			fill(_container, capacity);
 		}
 
-	private:
+	protected:
 		T* _container;
 		size_t _size;
 		size_t _capacity;
