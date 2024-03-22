@@ -5,21 +5,21 @@
 
 namespace XGB
 {
-	class AnalogComponent
-		: public Component
+	class AnalogComponent :
+		public Component
 	{
 	public:
 		using Component::Component;
 
 	public:
-		inline const uint8_t read() const
+		inline uint8_t read() const
 		{
 			return analogRead(pin());
 		}
 
 		inline void write(uint8_t value)
 		{
-			clamp(value, 0, 255);
+			clamp<uint8_t>(value, 0, 255);
 			analogWrite(pin(), value);
 		}
 	};

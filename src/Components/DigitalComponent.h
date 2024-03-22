@@ -12,7 +12,7 @@ namespace XGB
 		using Component::Component;
 
 	public:
-		inline const uint8_t read() const
+		inline uint8_t read() const
 		{
 			return digitalRead(pin());
 		}
@@ -22,7 +22,7 @@ namespace XGB
 			digitalWrite(pin(), value);
 		}
 
-		inline const bool isHigh() const
+		inline bool isHigh() const
 		{
 			return read() == HIGH;
 		}

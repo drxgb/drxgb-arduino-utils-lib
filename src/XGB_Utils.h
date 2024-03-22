@@ -1,8 +1,5 @@
 #pragma once
 
-// Definições de tipo
-using byte = char;
-
 // Funções utilitárias
 #include "functions.h"
 
@@ -10,4 +7,11 @@ using byte = char;
 #include "Components/AnalogComponent.h"
 #include "Components/DigitalComponent.h"
 
-using Led = DigitalComponent;
+// Coleções
+#include "Collections/List.h"
+
+// Definições de tipo
+namespace XGB
+{
+	using Led = DigitalComponent;
+}

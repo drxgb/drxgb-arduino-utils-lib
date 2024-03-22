@@ -18,12 +18,12 @@ namespace XGB
 			pinMode(_pin, mode);
 		}
 
-		inline const uint8_t pin() const
+		inline uint8_t pin() const
 		{
 			return _pin;
 		}
 
-		virtual inline const uint8_t read() const = 0;
+		virtual inline uint8_t read() const = 0;
 		virtual inline void write(uint8_t value) = 0;
 
 	private:
