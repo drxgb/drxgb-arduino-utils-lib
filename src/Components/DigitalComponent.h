@@ -1,6 +1,5 @@
 // DigitalComponent.h : Classe responável por representar um componente com pino digital
 #pragma once
-
 #include "Component.h"
 
 namespace XGB
@@ -19,7 +18,7 @@ namespace XGB
 
 		inline void write(uint8_t value)
 		{
-			digitalWrite(pin(), value);
+			digitalWrite(pin(), value ? HIGH : LOW);
 		}
 
 		inline bool isHigh() const

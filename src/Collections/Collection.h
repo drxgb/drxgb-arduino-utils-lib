@@ -26,7 +26,7 @@ namespace XGB
 	public:
 		inline T operator[](int index) const
 		{
-			if (index > _size)
+			if (static_cast<size_t>(index) > _size)
 				return 0;
 			return _container[index];
 		}
