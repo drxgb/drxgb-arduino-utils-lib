@@ -17,6 +17,8 @@ namespace XGB
 			begin(mode);
 		}
 
+		virtual ~Component() {}
+
 	public:
 		inline void begin(uint8_t mode)
 		{

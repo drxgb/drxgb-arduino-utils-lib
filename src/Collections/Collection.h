@@ -46,6 +46,14 @@ namespace XGB
 			return _capacity;
 		}
 
+		inline void forEach(void(*callback)(T item))
+		{
+			for (size_t i = 0; i < _size; ++i)
+			{
+				callback(_container[i]);
+			}
+		}
+
 		virtual inline void add(const T item) = 0;
 		virtual inline void remove(const size_t index) = 0;
 

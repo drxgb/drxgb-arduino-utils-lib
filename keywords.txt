@@ -1,5 +1,6 @@
-Led	KEYWORD1		
-DigitalComponent	KEYWORD1		
-AnalogComponent	KEYWORD1		
-Component	KEYWORD1		
-List	KEYWORD1		
+Led	KEYWORD1		DATA_TYPE
+DigitalComponent	KEYWORD1		DATA_TYPE
+AnalogComponent	KEYWORD1		DATA_TYPE
+Component	KEYWORD1		DATA_TYPE
+List	KEYWORD1		DATA_TYPE
+Button	KEYWORD1		DATA_TYPE
