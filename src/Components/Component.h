@@ -20,7 +20,7 @@ namespace XGB
 		virtual ~Component() {}
 
 	public:
-		inline void begin(uint8_t mode)
+		virtual inline void begin(uint8_t mode)
 		{
 			pinMode(_pin, mode);
 		}
