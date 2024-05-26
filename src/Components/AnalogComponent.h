@@ -22,5 +22,10 @@ namespace XGB
 			clamp<uint8_t>(value, 0, 255);
 			analogWrite(pin(), value);
 		}
+
+		inline bool isHigh() const
+		{
+			return read() == 255;
+		}
 	};
 }

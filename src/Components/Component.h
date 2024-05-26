@@ -7,8 +7,12 @@ namespace XGB
 	class Component
 	{
 	public:
-		Component(uint8_t pin)
-			: _pin(pin)
+		Component() :
+			_pin(0xFF)
+		{}
+
+		Component(uint8_t pin) :
+			_pin(pin)
 		{}
 
 		Component(uint8_t pin, uint8_t mode) :
@@ -20,7 +24,7 @@ namespace XGB
 		virtual ~Component() {}
 
 	public:
-		virtual inline void begin(uint8_t mode)
+		virtual void begin(uint8_t mode)
 		{
 			pinMode(_pin, mode);
 		}
@@ -32,6 +36,7 @@ namespace XGB
 
 		virtual uint8_t read() const = 0;
 		virtual void write(uint8_t value) = 0;
+		virtual bool isHigh() const = 0;
 
 	private:
 		uint8_t _pin;

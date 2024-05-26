@@ -9,6 +9,7 @@ namespace XGB
 	{
 	public:
 		using Component::Component;
+		virtual ~DigitalComponent() {}
 
 	public:
 		inline uint8_t read() const

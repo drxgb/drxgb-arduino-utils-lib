@@ -1,5 +1,7 @@
 // Display.h : Representa um componente de visor
 #pragma once
+#include "DigitalComponent.h"
+#include "../functions.h"
 
 
 namespace XGB
@@ -7,24 +9,68 @@ namespace XGB
     class Display :
         public DigitalComponent
     {
-        Display(uint8_t pins[], uint8_t value = 0);
-        Display(uint8_t pins[], uint8_t mode, uint8_t value);
+	public:
+		Display(uint8_t pins[], Component* extra = nullptr) :
+			_pins(pins),
+			_extra(extra)
+		{}
+
+        explicit Display(uint8_t pins[], uint8_t mode, Component* extra = nullptr) :
+			Display(pins, extra)
+		{
+			begin(mode);
+		}
+
+		virtual ~Display()
+		{
+			delete _extra;
+			_extra = nullptr;
+		}
 
     public:
-        inline void begin(int mode) override
+        void begin(int mode)
         {
-            for (int i = 0; i < BCD_SEGMENTS; ++i)
+            for (size_t i = 0U; i < segments(); ++i)
             {
-                pinMode(_pins[i], mode);
+				pinMode(_pins[i], mode);
             }
         }
 
-        virtual size_t pinCount() const = 0;
+		inline Component* extra() const
+		{
+			return _extra;
+		}
 
-        uint8_t read() const = delete;
-		void write(uint8_t value) = delete;
+		virtual void clear(const bool active = false);
+        virtual size_t segments() const
+		{
+			return 0U;
+		}
+
+		inline uint8_t pin(size_t index)
+		{
+			clamp<size_t>(index, 0U, segments());
+			return _pins[index];
+		}
+
+
+		uint8_t pin() = delete;
 
     private:
-        uint8_t _pins[];
+        uint8_t* _pins;
+		Component* _extra;
     };
+
+
+	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	// 					IMPLEMENTAÇÃO
+	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+	void Display::clear(const bool active)
+	{
+		for (size_t i = 0U; i < segments(); ++i)
+		{
+			digitalWrite(_pins[i], active ? HIGH : LOW);
+		}
+	}
 }
