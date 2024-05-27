@@ -33,7 +33,7 @@ namespace XGB
 
 		inline void clear()
 		{
-			fill<T>(_container, _capacity);
+			fill<T>(_container, 0U, _capacity);
 		}
 
 		inline size_t size() const
